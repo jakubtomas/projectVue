@@ -2,11 +2,24 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link>|
+      <router-link to="/people">people</router-link>|
+      <router-link to="/planets">planets</router-link>|
+      <router-link to="/films">films</router-link>|
+      <router-link to="/species">species</router-link>|
+      <router-link to="/vehicles">vehicles</router-link>|
+      <router-link to="/starships">starships</router-link>|
+      
     </div>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  name:"app"
+}
+</script>
 
 <style lang="scss">
 #app {

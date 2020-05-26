@@ -58,6 +58,7 @@
           >Community Chat</a
         >
       </li>
+        
       <li>
         <a href="https://twitter.com/vuejs" target="_blank" rel="noopener"
           >Twitter</a
