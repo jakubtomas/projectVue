@@ -6,8 +6,14 @@ import store from "./store";
 Vue.config.productionTip = false;
 
 new Vue({
-  el:'#app',
+  el: "#app",
   router,
   store,
-  render: h => h(App)
+  render: h => h(App),
+
+
+  myFunction(){
+    console.log("hello world ");
+  
+  }
 }).$mount("#app");

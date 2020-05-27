@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>|
+      
       <router-link to="/people">people</router-link>|
       <router-link to="/planets">planets</router-link>|
       <router-link to="/films">films</router-link>|
@@ -18,7 +17,7 @@
 <script>
 export default {
   name:"app"
-}
+};
 </script>
 
 <style lang="scss">

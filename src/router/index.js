@@ -1,63 +1,88 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import People from "../views/People.vue";
+import People from "../components/People.vue";
 
-import Planets from "../views/Planets.vue";
-import Films from "../views/Films.vue";
-import Species from "../views/Species.vue";
+import Planets from "../components/Planets.vue";
+import Films from "../components/Films.vue";
+import Species from "../components/Species.vue";
 
-import Vehicles from "../views/Vehicles.vue";
-import Starships from "../views/Starships.vue";
+import Vehicles from "../components/Vehicles.vue";
+import Starships from "../components/Starships.vue";
 
+import singleFilm from "../components/singleFilm.vue";
+import singlePerson from "../components/singlePerson.vue";
+
+import singlePlanet from "../components/singlePlanet.vue";
+import singleSpecie from "../components/singleSpecie.vue";
+
+import singleVehicle from "../components/singleVehicle.vue";
+import singleStarship from "../components/singleStarship.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  
   {
-    path: "/",
-    name: "Home",
-    component: Home
-  },
-  {
-    path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
-  },
-  {
-    path:'/people/:id',
+    path: "/people/",
     name: "people",
     props: true,
     component: People
   },
   {
-    path:'/planets',
+    path: "/people/:id",
+    name: "people",
+    component: singlePerson
+  },
+  {
+    path: "/planets",
     name: "planets",
     component: Planets
   },
   {
-    path:'/films',
+    path: "/planets/:id",
+    name: "planets",
+    component: singlePlanet
+  },
+  
+  {
+    path: "/films",
     name: "films",
     component: Films
   },
   {
-    path:'/species',
+    path: "/films/:id",
+    name: "films",
+    component: singleFilm
+  },
+  {
+    path: "/species",
     name: "species",
     component: Species
   },
   {
-    path:'/vehicles',
+    path: "/species/:id",
+    name: "species",
+    component: singleSpecie
+  },
+  {
+    path: "/vehicles",
     name: "vehicles",
     component: Vehicles
   },
   {
-    path:'/starships',
+    path: "/vehicles/:id",
+    name: "vehicles",
+    component: singleVehicle
+  },
+  {
+    path: "/starships",
     name: "starships",
     component: Starships
+  },
+  {
+    path: "/starships/:id",
+    name: "starships",
+    component: singleStarship
   }
 ];
 
