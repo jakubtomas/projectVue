@@ -8,6 +8,7 @@
       <router-link to="/species">species</router-link>|
       <router-link to="/vehicles">vehicles</router-link>|
       <router-link to="/starships">starships</router-link>|
+      <router-link to="/wplayground">wplayground</router-link>
       
     </div>
     <router-view />

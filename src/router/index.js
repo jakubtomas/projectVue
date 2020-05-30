@@ -18,6 +18,8 @@ import singleSpecie from "../components/singleSpecie.vue";
 import singleVehicle from "../components/singleVehicle.vue";
 import singleStarship from "../components/singleStarship.vue";
 
+import wplayground from "../components/wplayground.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -83,6 +85,11 @@ const routes = [
     path: "/starships/:id",
     name: "starships",
     component: singleStarship
+  },
+  {
+    path: "/wplayground",
+    name: "wplayground",
+    component: wplayground
   }
 ];
 

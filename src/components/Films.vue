@@ -2,7 +2,7 @@
   <div id="films">
     <div v-for="(film, index) in films" :key="index" class="single-film">
       <router-link v-bind:to="'/films/' + parseInt(index+1) ">
-        <div v:bind:id="1">{{film.title}}</div>
+        <div v:bind:id="1">{{film.release_date}}</div>
       </router-link>
     </div>
   </div>
