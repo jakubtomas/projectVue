@@ -19,6 +19,7 @@ import singleVehicle from "../components/singleVehicle.vue";
 import singleStarship from "../components/singleStarship.vue";
 
 import wplayground from "../components/wplayground.vue";
+import registration from "../components/registration.vue";
 
 Vue.use(VueRouter);
 
@@ -90,6 +91,11 @@ const routes = [
     path: "/wplayground",
     name: "wplayground",
     component: wplayground
+  },
+  {
+    path: "/registration",
+    name: "registration",
+    component: registration
   }
 ];
 

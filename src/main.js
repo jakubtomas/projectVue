@@ -12,8 +12,4 @@ new Vue({
   render: h => h(App),
 
 
-  myFunction(){
-    console.log("hello world ");
-  
-  }
 }).$mount("#app");
