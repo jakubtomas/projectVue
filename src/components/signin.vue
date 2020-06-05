@@ -5,14 +5,14 @@
     <h2>Sign in </h2>
 
 
-    <p class="alert-danger" v-if="data.error"> Message from server <strong>{{data.error}}</strong></p>
+    <p class="alert-danger" v-if="this.$store.state.data.error"> Message from server <strong>{{this.$store.state.data.error}}</strong></p>
 
-    <div  v-if="data.token" class="alert-success"> 
+    <div  v-if="this.$store.state.data.token" class="alert-success"> 
       <h3>Successfully login</h3>
-      <strong> fname {{data.fname}}</strong>
-      <p>lname {{data.lname}}</p>
-      <p>login {{data.login}}</p>
-      <p>token <em> {{data.token}}</em></p>
+      <strong> fname {{this.$store.state.data.fname}}</strong>
+      <p>lname {{this.$store.state.data.lname}}</p>
+      <p>login {{this.$store.state.data.login}}</p>
+      <p>token <em> {{this.$store.state.data.token}}</em></p>
     </div>
 
 
@@ -40,7 +40,17 @@
     <!-- <p v-if="Object.values(data)"> my data <strong>{{Object.values(data)[0]}}</strong></p> -->
 
 
-<h4>{{login}}</h4>
+<!-- <h4> Login  {{login}}</h4>
+<h5>Hello   {{this.$store.state.user}}</h5>
+
+<br>
+
+<p> lname {{this.$store.state.data.lname}}</p>
+<p>fname {{this.$store.state.data.fname}}</p>
+<p> login {{this.$store.state.data.login}}</p>
+<p> token {{this.$store.state.data.token}}</p>
+<p> Error {{this.$store.state.data.error}}</p> -->
+
   </div>
 
 
@@ -56,10 +66,18 @@ export default {
       login :"",
       password : "",
       data : [],
+      value : "Hodnota ",
+      valueSecond : ""
     };
   },
   methods: {
+    addData(){
+
+    },
     loginUser(){
+        // this.$store.state.user.address = 'London';
+      console.log(this.$store.state.user.username);
+            
         var myHeaders = new Headers();
 
 myHeaders.append("Content-Type", "application/json");
@@ -76,16 +94,52 @@ var raw = JSON.stringify({
     redirect: 'follow'
   };
 
+console.log(this.value);
 
 fetch("http://localhost:8080/login", requestOptions)
   .then(res => res.json())
-  .then(json => this.data = json)
+  .then(json => this.$store.state.data = json)
   .then(result => console.log(result))
   .catch(error => console.log('problem', error));
 
+   //this.$store.state.user.fname = this.data.fname;
+  console.log("ahoj" + this.data.login);
+  //this.$store.state.user.fname = this.value;
+
+   console.log("Value undre me  "+ this.value);
+   console.log(this.value);
+
+// tie data tam musi dat asi priamo do index vue cez this 
+    if (this.data.login) {
+      this.$store.state.user.fname = this.data.login;
+      console.log("We have second value ");
+      
+    }else{
+      console.log("Weh dont have data fname  ");
+      
     }
+
+
+     if (this.value) {
+      console.log("Wee HAVE VALUE  ");
+      
+    }else{
+      console.log("Weh dont have VALUE ");
+      
+    }
+   
+    }
+
   },
   created() {
+    if (this.data.login) {
+      this.$store.state.user.fname = this.data.login;
+      console.log("We have second value ");
+      
+    }else{
+      console.log("Weh dont have data fname  seriously");
+      
+    }
  }
 
 };
@@ -108,6 +162,7 @@ fetch("http://localhost:8080/login", requestOptions)
     /* background-color: #d4edda; */
     border-color: #304635;
     border-radius: 15px;
+    box-shadow: 0 0 20px 0 rgb(35, 32, 32), 0 5px 5px 0 rgba(247, 23, 23, 0);
 }
 
 .alert-danger{
@@ -138,7 +193,7 @@ fetch("http://localhost:8080/login", requestOptions)
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 0 20px 0 rgb(11, 11, 11), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .form input {
   font-family: "Roboto", sans-serif;

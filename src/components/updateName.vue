@@ -2,33 +2,43 @@
   <div  id="films">
 
 <!--  Form start function login @keydown.enter  @submit.prevent -->
-    <h2>Create new account</h2>
+    <h2>Change name  </h2>
 
 
-    <p class="alert-danger" v-if="data.error"> Message from server <strong>{{data.error}}</strong></p>
+    <p class="alert-danger" v-if="this.$store.state.updateUser.error"> Message from server <strong>{{this.$store.state.updateUser.error}}</strong></p>
 
-    <div  v-if="data.login" class="alert-success"> 
-      <h3>Account successfully has been created</h3>
-      <strong> fname {{data.fname}}</strong>
-      <p>lname {{data.lname}}</p>
-      <p>login {{data.login}}</p>
-  
+    <div  v-if="this.$store.state.updateUser.message" class="alert-success"> 
+      <h3>Message from server</h3>
+      <strong> fname {{this.$store.state.updateUser.message}}</strong>
+      
     </div>
 
 
 <div class="login-page">
   <div class="form">
-    <form class="register-form" @submit.prevent="addUser">
+    <!-- <form class="register-form" @submit.prevent="signIn">
       <input type="text" placeholder="fname" v-model="fname "/>
       <input type="text" placeholder="lname" v-model="lname "/>
       <input type="text" placeholder="login" v-model="login"/>
       <input type="password" placeholder="password" v-model="password"/>
       <button>create</button>
       <p class="message">Already registered? <a href="#">Sign In</a></p>
+    </form> -->
+    <form class="login-form" @submit.prevent="updateUser">
+      <input type="text"  :placeholder=this.$store.state.data.fname  v-model="fname" />
+      <input type="text" :placeholder=this.$store.state.data.lname v-model ="lname" />
+      <button>Update</button>
+      <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
     </form>
-
   </div>
 </div>
+
+
+<p> fname {{this.$store.state.data.fname}}</p>
+<br>
+<p> lname {{this.$store.state.data.lname}}</p>
+<p> this fname is  {{this.fname}}</p>
+<h4 v-if="this.error"> {{this.error}}</h4>
 
   </div>
 
@@ -37,44 +47,71 @@
 
 <script>
 export default {
-  data() {
+  
+  data: function()  {
     return {
-      fname :"",
-      lname :"",
+      fname : "",
+      lname:"",
       login :"",
+      error:"",
       password : "",
       data : [],
+      value : "Hodnota "
     };
   },
   methods: {
-    addUser(){
-        var myHeaders = new Headers();
+    updateData(){
+        // empty function
+    },
+    updateUser(){
+        if (!this.fname || !this.lname) {
+          console.log("jedna hodnota chyba ");
+          this.error= "Empty fname or lname ";
+          return
+        }else{
+          console.log("mame vsetky hodnoty  ");
+          this.$store.state.data.fname = this.fname;
+          this.$store.state.data.lname = this.lname;
+        }
+      
+       // this.$store.state.user.address = 'London';
+      console.log(this.$store.state.user.username);
+            
+        var myHeaders = new Headers(); //this.$store.state.data.login
+      //  myHeaders.append("Authorization", this.$store.state.data.token);
+      myHeaders.append("Authorization",this.$store.state.data.token);
+        myHeaders.append("Content-Type", "application/json");
 
-myHeaders.append("Content-Type", "application/json");
-
-var raw = JSON.stringify({"fname":this.fname,
+      var raw = JSON.stringify({
+                          "fname":this.fname,
                           "lname":this.lname,
-                          "login":this.login,
-                          "password":this.password
+                         // "login": this.$store.state.data.login
+                          "login":this.$store.state.data.login,
                           });
 
   var requestOptions = {
-    method: 'POST',
+    method: 'PATCH',
     headers: myHeaders,
     body: raw,
     redirect: 'follow'
   };
 
-
-fetch("http://localhost:8080/signup", requestOptions)
+fetch("http://localhost:8080/update", requestOptions)
   .then(res => res.json())
-  .then(json => this.data = json)
+  .then(json => this.$store.state.updateUser = json)
   .then(result => console.log(result))
   .catch(error => console.log('problem', error));
 
+
+
+    
     }
+
+
+
   },
   created() {
+   
  }
 
 };
@@ -97,6 +134,7 @@ fetch("http://localhost:8080/signup", requestOptions)
     /* background-color: #d4edda; */
     border-color: #304635;
     border-radius: 15px;
+    box-shadow: 0 0 20px 0 rgb(35, 32, 32), 0 5px 5px 0 rgba(247, 23, 23, 0);
 }
 
 .alert-danger{
@@ -127,7 +165,7 @@ fetch("http://localhost:8080/signup", requestOptions)
   margin: 0 auto 100px;
   padding: 45px;
   text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  box-shadow: 0 0 20px 0 rgb(11, 11, 11), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
 .form input {
   font-family: "Roboto", sans-serif;

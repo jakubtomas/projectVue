@@ -20,6 +20,11 @@ import singleStarship from "../components/singleStarship.vue";
 
 import wplayground from "../components/wplayground.vue";
 import registration from "../components/registration.vue";
+import signin from "../components/signin.vue";
+
+import updateName from "../components/updateName.vue";
+
+import updatePassword from "../components/updatePassword.vue";
 
 Vue.use(VueRouter);
 
@@ -96,6 +101,21 @@ const routes = [
     path: "/registration",
     name: "registration",
     component: registration
+  },
+  {
+    path: "/signin",
+    name: "signin",
+    component: signin
+  },
+  {
+    path: "/updateName",
+    name: "updateName",
+    component: updateName
+  },
+  {
+    path: "/updatePassword",
+    name: "updatePassword",
+    component: updatePassword
   }
 ];
 
