@@ -1,12 +1,30 @@
 <template>
   <div id="films">
-    <div v-for="(film, index) in characters" :key="index" class="single-film">
-        <p>{{film.error}}</p>
-        <h4>From {{film.from}}</h4>
-        <h3>To {{film.to}}</h3>
+    <div v-for="(film, index) in dataHistory" :key="index" class="single-film">
+        <p>{{film.datetime}}</p>
+           <p>{{film._id}}</p>
+              <p>{{film.__ob__.vmCount}}</p>
+        <h4>From {{film.login}}</h4>
+        <h3>To {{film.type}}</h3>
         <div v:bind:id="1">{{film.message}}</div>
       
     </div>
+
+
+  <table>
+    <tr>
+      <th>Type </th>
+      <th>date </th>
+      <th>Login </th>
+    </tr>
+
+
+    <tr v-for="(film, index) in dataHistory" :key="index" >
+      <td>{{film.type}}</td>
+      <td>{{film.datetime}}</td>
+      <td>{{film.login}}</td>
+    </tr>
+  </table>
 
 
 <!--  Form start function login @keydown.enter  @submit.prevent -->
@@ -55,11 +73,13 @@ export default {
       message:"Hello ",
       id: "",
       characters : [],
+      dataHistory : [],
     };
   },
   methods: {
     addUser(){
         var myHeaders = new Headers();
+        
 myHeaders.append("Content-Type", "application/json");
 
 var raw = JSON.stringify({"fname":this.fname,
@@ -103,14 +123,42 @@ fetch("http://localhost:8080/signup", requestOptions)
 //var raw = "";
 
 
+var myHeaders = new Headers();
+myHeaders.append("Authorization","30ddd95cb26e8767");
+myHeaders.append("Content-Type", "application/json");
 
-  
 
-// fetch("http://localhost:8080/playground", requestOptions)
-// .then(response => response.json())
-// .then(result => console.log(result))
-// .catch(error => console.log('error', error));
-      
+var raw = JSON.stringify({
+                          "login":"user24"
+                         
+                          });
+
+
+
+  var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+//  fetch("http://localhost:8080/log", requestOptions)
+//  .then(response => response.json())
+//  .then(result => console.log(result))
+//  .catch(error => console.log('error', error));
+     
+     
+     fetch("http://localhost:8080/log", requestOptions)
+    // .then(function(response) {
+    // console.log(response.status); // returns 200
+
+    // })
+
+  .then(res => res.json())
+  .then(json => this.dataHistory = json)
+  .then(result => console.log(result))
+  .catch(error => console.log('problem', error));
+
  }
 
 
@@ -127,6 +175,22 @@ fetch("http://localhost:8080/signup", requestOptions)
 
 
 <style >
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
 .add-form{
   border: 1px solid black;
   margin: 20px 0px;

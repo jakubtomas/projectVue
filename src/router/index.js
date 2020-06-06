@@ -26,6 +26,10 @@ import updateName from "../components/updateName.vue";
 
 import updatePassword from "../components/updatePassword.vue";
 
+
+
+import logHistory from "../components/logHistory.vue";
+import messages from "../components/messages.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -116,6 +120,16 @@ const routes = [
     path: "/updatePassword",
     name: "updatePassword",
     component: updatePassword
+  },
+  {
+    path: "/logHistory",
+    name: "logHistory",
+    component: logHistory
+  },
+  {
+    path: "/messages",
+    name: "messages",
+    component: messages
   }
 ];
 

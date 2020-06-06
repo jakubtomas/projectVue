@@ -32,8 +32,8 @@
     <div id="nav" v-else>
       
     
-      <router-link to="/message">Message</router-link>
-      <router-link to="/log">Log</router-link>
+      <router-link to="/messages">Message</router-link>
+      <router-link to="/logHistory">logHistory</router-link>
       <router-link to="/updatePassword">Change Password</router-link>
       <router-link to="/updateName">Update name</router-link>
       <button  type="submit">Logout</button>
