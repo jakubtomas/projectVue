@@ -1,15 +1,14 @@
 <template>
   <div id="films">
-    <div v-for="(film, index) in dataHistory" :key="index" class="single-film">
-        <p>{{film.datetime}}</p>
-           <p>{{film._id}}</p>
-              <p>{{film.__ob__.vmCount}}</p>
-        <h4>From {{film.login}}</h4>
-        <h3>To {{film.type}}</h3>
-        <div v:bind:id="1">{{film.message}}</div>
-      
-    </div>
+   <div v-for="(item, index) in messages" :key="index">
+      <p>{{item.from}}</p>
+      <p>{{item.to}}</p>
+      <p>{{item.message}}</p>
+      <p>{{item.datetime}}</p>
 
+   </div>
+
+<h4>toto je data History {{dataHistory}}</h4>
 
   <table>
     <tr>
@@ -30,7 +29,7 @@
 <!--  Form start function login @keydown.enter  @submit.prevent -->
 <h1>Registration user</h1>
   <form class="add-form" @submit.prevent="addUser">    
-    fname <input type="text" v-model="fname"> <br>
+    ffname <input type="text" v-model="fname"> <br>
     lname <input type="text" v-model="lname"> <br>
     
     login <br><input type="text" v-model="login"> <br>
@@ -55,7 +54,6 @@
      </li>
 </ul>
 
-<h4>{{login}}</h4>
   </div>
 
 
@@ -74,6 +72,7 @@ export default {
       id: "",
       characters : [],
       dataHistory : [],
+      messages : []
     };
   },
   methods: {
@@ -111,26 +110,13 @@ fetch("http://localhost:8080/signup", requestOptions)
   },
   created() {
 
-
-
-      // fetch("http://localhost:8080/playground",requestOptions)
-      //   .then(response => response.json())
-      //   .then(json => {
-      //     this.characters = json.results} );
-         
-          
-        
-//var raw = "";
-
-
-var myHeaders = new Headers();
-myHeaders.append("Authorization","30ddd95cb26e8767");
+  var myHeaders = new Headers();
+myHeaders.append("Authorization","212e43780f2a59d6");
 myHeaders.append("Content-Type", "application/json");
 
 
-var raw = JSON.stringify({
-                          "login":"user24"
-                         
+var raw = JSON.stringify({ "from":"user25",
+                          "myLogin":"user24"
                           });
 
 
@@ -141,32 +127,17 @@ var raw = JSON.stringify({
   body: raw,
   redirect: 'follow'
 };
-
-//  fetch("http://localhost:8080/log", requestOptions)
-//  .then(response => response.json())
-//  .then(result => console.log(result))
-//  .catch(error => console.log('error', error));
-     
-     
-     fetch("http://localhost:8080/log", requestOptions)
-    // .then(function(response) {
-    // console.log(response.status); // returns 200
-
-    // })
-
-  .then(res => res.json())
-  .then(json => this.dataHistory = json)
-  .then(result => console.log(result))
-  .catch(error => console.log('problem', error));
+ 
+     fetch("http://localhost:8080/messages", requestOptions)
+     .then(res => res.json())
+    .then(json => this.messages = json)
+    .then(result => console.log(result))
+    .catch(error => console.log('problem', error));
+    // .then((response) => response.json())
+    // .then((responseJson) => {
+    // console.log(responseJson);
 
  }
-
-
-// .then(res => res.json())
-// .then(json => this.characters = json)
-
-
-
 };
 
 
@@ -196,4 +167,51 @@ tr:nth-child(even) {
   margin: 20px 0px;
   margin-bottom: 30px;
 };
+
+
+
+
+.container {
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+.time-left {
+  float: left;
+  color: #999;
+}
 </style>
