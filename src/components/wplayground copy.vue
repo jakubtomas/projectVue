@@ -1,13 +1,11 @@
 <template>
   <div id="films">
-   <div>
-      <ul>
-        <li v-for="(user, index) in users" :key="index">
-        <router-link v-bind:to="'/message/' + user ">
-        <div v:bind:id="1">{{user}}</div>
-      </router-link>
-        </li>
-      </ul>
+   <div v-for="(item, index) in messages" :key="index">
+      <p>{{item.from}}</p>
+      <p>{{item.to}}</p>
+      <p>{{item.message}}</p>
+      <p>{{item.datetime}}</p>
+
    </div>
 
 <h4>toto je data History {{dataHistory}}</h4>
@@ -74,23 +72,51 @@ export default {
       id: "",
       characters : [],
       dataHistory : [],
-      messages : [],
-       users : []
+      messages : []
     };
   },
   methods: {
     addUser(){
+        var myHeaders = new Headers();
+        
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({"fname":this.fname,
+                          "lname":this.lname,
+                          "login":this.login,
+                          "password":"password123123"
+                          });
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+
+fetch("http://localhost:8080/signup", requestOptions)
+    // .then(function(response) {
+    // console.log(response.status); // returns 200
+
+    // })
+
+  .then(res => res.json())
+  .then(json => this.characters = json)
+  .then(result => console.log(result))
+  .catch(error => console.log('problem', error));
+
     }
   },
   created() {
 
   var myHeaders = new Headers();
-myHeaders.append("Authorization","519a126157a1da52");
+myHeaders.append("Authorization","212e43780f2a59d6");
 myHeaders.append("Content-Type", "application/json");
 
 
-var raw = JSON.stringify({ "login":"user24"
-                          
+var raw = JSON.stringify({ "from":"user25",
+                          "myLogin":"user24"
                           });
 
 
@@ -102,9 +128,9 @@ var raw = JSON.stringify({ "login":"user24"
   redirect: 'follow'
 };
  
-     fetch("http://localhost:8080/users", requestOptions)
+     fetch("http://localhost:8080/messages", requestOptions)
      .then(res => res.json())
-    .then(json => this.users = json)
+    .then(json => this.messages = json)
     .then(result => console.log(result))
     .catch(error => console.log('problem', error));
     // .then((response) => response.json())

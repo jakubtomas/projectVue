@@ -1,18 +1,14 @@
 <template>
-   <table>
-    <tr>
-      <th class="headerTable">Type </th>
-      <th class="headerTable">date </th>
-      <th class="headerTable">Login </th>
-    </tr>
+    <div>
+      <ul>
+        <li v-for="(user, index) in users" :key="index">
+        <router-link v-bind:to="'/message/' + user ">
+        <div v:bind:id="1">{{user}}</div>
+      </router-link>
+        </li>
+      </ul>
+   </div>
 
-
-    <tr v-for="(item, index) in dataHistory" :key="index" >
-      <td class="lineTable">{{item.type}}</td>
-      <td class="lineTable">{{item.datetime}}</td>
-      <td class="lineTable">{{item.login}}</td>
-    </tr>
-  </table>
 </template>
 
 <script>
@@ -20,6 +16,7 @@ export default {
   data() {
     return {
       dataHistory: [],
+      users: [],
       id: ""
     };
   },
@@ -31,8 +28,8 @@ myHeaders.append("Authorization",this.$store.state.data.token);
 myHeaders.append("Content-Type", "application/json");
 
 
-var raw = JSON.stringify({
-                          "login":this.$store.state.data.login
+var raw = JSON.stringify({ "login":this.$store.state.data.login
+                          
                           });
 
 
@@ -44,13 +41,16 @@ var raw = JSON.stringify({
   redirect: 'follow'
 };
  
-     fetch("http://localhost:8080/log", requestOptions)
-    .then(res => res.json())
-    .then(json => this.dataHistory = json)
+     fetch("http://localhost:8080/users", requestOptions)
+     .then(res => res.json())
+    .then(json => this.users = json)
     .then(result => console.log(result))
     .catch(error => console.log('problem', error));
+    // .then((response) => response.json())
+    // .then((responseJson) => {
+    // console.log(responseJson);
 
-  }
+ }
 };
 </script>
 

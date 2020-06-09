@@ -134,7 +134,7 @@ const routes = [
     component: messages
   },
   {
-    path: "/message/:id",
+    path: "/message/:login",
     name: "message",
     component:message
   }

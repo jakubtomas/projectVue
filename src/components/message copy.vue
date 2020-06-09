@@ -3,9 +3,7 @@
 <div class="main-box">
    
 <div v-for="(message, index) in messages" :key="index">
-
- <div>
-
+ 
 <div v-if="message.from == myLogin"  class="container" >
    
   <em class="time-left">From {{message.from}}</em>
@@ -25,11 +23,9 @@
 
 </div>
 
- </div>
-
 
 </div>
-<!-- chatbox__messages__user-message--ind-message -->
+
  
 </div>
 
@@ -91,9 +87,6 @@ var raw = JSON.stringify({ "from":this.login,
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
-  max-width: 500px;
-  margin : 0 auto;
-  
 }
 
 .darker {
