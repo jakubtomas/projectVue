@@ -1,63 +1,49 @@
 <template>
-  <div id="films">
-   <div>
-      <ul>
-        <li v-for="(user, index) in users" :key="index">
-        <router-link v-bind:to="'/message/' + user ">
-        <div v:bind:id="1">{{user}}</div>
-      </router-link>
-        </li>
-      </ul>
-   </div>
 
-<h4>toto je data History {{dataHistory}}</h4>
+<div class="big-box">
+    <div class="small-box">
+        <ul class="zoznam">
+          <li><a href="">Hello</a></li>
+          <li><a href="">Hello</a></li>
+          <li><a href="">Hello</a></li>
+          <li><a href="">Hello</a></li>
+          <li><a href="">Hello</a></li>
+          <li><a href="">Hello</a></li>
+        </ul>
+    </div>
+    <div class="main-box">
+      
+      <div >
 
-  <table>
-    <tr>
-      <th>Type </th>
-      <th>date </th>
-      <th>Login </th>
-    </tr>
+        <div class="main-container">
 
+              <div   class="containerr container-left" >
+                
+                <em class="time-left">From Jakub</em>
+                <!-- <img src="/w3images/bandmember.jpg" alt="Avatar" style="width:100%;"> -->
+                <p class="message message-left" >message hellow how are you </p>
+                <span class="time-right">250564654654</span>
 
-    <tr v-for="(film, index) in dataHistory" :key="index" >
-      <td>{{film.type}}</td>
-      <td>{{film.datetime}}</td>
-      <td>{{film.login}}</td>
-    </tr>
-  </table>
-
-
-<!--  Form start function login @keydown.enter  @submit.prevent -->
-<h1>Registration user</h1>
-  <form class="add-form" @submit.prevent="addUser">    
-    ffname <input type="text" v-model="fname"> <br>
-    lname <input type="text" v-model="lname"> <br>
-    
-    login <br><input type="text" v-model="login"> <br>
-    Password <input type="text" v-model="password"> <br>
-    <button type="submit">Create New User</button>
-  </form>
+              </div>
 
 
-    <!-- <p v-if="Object.values(characters)"> my data <strong>{{Object.values(characters)[0]}}</strong></p> -->
-    <p v-if="characters.error"> my data <strong>{{characters.error}}</strong></p>
-<div v-else> 
-  <strong> fname {{characters.fname}}</strong>
-  <p>l name {{characters.lname}}</p>
-  <p>password {{characters.password}}</p>
-  <p>login {{characters.login}}</p>
-  <p> token {{characters.token}}</p>
+              <div class="containerr   container-right  darker">
+                
+                <em class="time-left">Name Katruin</em>
+                <!-- <img src="/w3images/bandmember.jpg" alt="Avatar" style="width:100%;"> -->
+                <p class="message message-right"> this is mesassdgaôlkajdflk  </p>
+                <span class="time-right">4582354</span>
+
+              </div>
+
+
+        </div>
+      </div>
+
+    </div>
+    <!-- chatbox__messages__user-message--ind-message -->
+ 
 </div>
-
-<ul>
-  <li v-for="(dude, index) in characters" :key="index">
-     {{characters.error}}
-     </li>
-</ul>
-
-  </div>
-
 
 </template>
 
@@ -65,32 +51,26 @@
 export default {
   data() {
     return {
-      fname :"",
-      lname :"",
-      login :"",
-      password : "",
-      films: [],
-      message:"Hello ",
-      id: "",
-      characters : [],
-      dataHistory : [],
-      messages : [],
-       users : []
+      user : "user24",
+      dataHistory: [],
+      id: this.$route.params.id,
+      login : this.$route.params.login,
+      myLogin : this.$store.state.data.login,
+      messages :[]
     };
   },
-  methods: {
-    addUser(){
-    }
-  },
+  methods: {},
   created() {
-
+ 
   var myHeaders = new Headers();
-myHeaders.append("Authorization","519a126157a1da52");
+myHeaders.append("Authorization",this.$store.state.data.token);
+//myHeaders.append("Authorization","692d2cc9291d9d65");
 myHeaders.append("Content-Type", "application/json");
 
 
-var raw = JSON.stringify({ "login":"user24"
-                          
+var raw = JSON.stringify({ "from":this.login,
+                          "myLogin":this.myLogin
+                          //"myLogin":"user24"
                           });
 
 
@@ -102,60 +82,93 @@ var raw = JSON.stringify({ "login":"user24"
   redirect: 'follow'
 };
  
-     fetch("http://localhost:8080/users", requestOptions)
+     fetch("http://localhost:8080/messages", requestOptions)
      .then(res => res.json())
-    .then(json => this.users = json)
+    .then(json => this.messages = json)
     .then(result => console.log(result))
     .catch(error => console.log('problem', error));
-    // .then((response) => response.json())
-    // .then((responseJson) => {
-    // console.log(responseJson);
-
+  
  }
 };
-
-
-
 </script>
 
+<style  scoped >
+ul {
+  list-style-type: none;
+ }
+.big-box{
+  max-width: 80%;
+  border: 1px solid red ;
 
-<style >
-table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  width: 100%;
+}
+.zoznam{
+  margin: 0 auto;
+
+}
+.small-box{
+  float: left;
+  background-color: #fff;
+  min-width: 100px;
+  margin: 0 auto;
+  list-style: none;
+  
+/* min-height: 120%; */
 }
 
-td, th {
-  border: 1px solid #dddddd;
-  text-align: left;
-  padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
-}
-
-.add-form{
+.message{
+  background-color: #aaaaaa;
+  border-radius: 10px;
   border: 1px solid black;
-  margin: 20px 0px;
-  margin-bottom: 30px;
-};
-
-
-
-
-.container {
-  border: 2px solid #dedede;
-  background-color: #f1f1f1;
+}
+.message-left{
+     
+    margin-left: 10px;
+    border-radius: 25px;
+    background-color: #82ccdd;
+    padding: 5px;
+    position: relative;
+}
+.message-right
+{
+ 
+    margin-right: 10px;
+    border-radius: 25px;
+    background-color: #78e08f;
+    padding: 5px;
+    position: relative;
+}
+.main-box{
+  border-radius: 16px;
+  max-width: 80%;
+  margin: 0 auto;
+  background-color: rgba(0,0,0,0.4) !important;
+} 
+.containerr {
+  
+  /* background-color: #f1f1f112; */
   border-radius: 5px;
   padding: 10px;
-  margin: 10px 0;
+  margin: 10px 10px;
+  max-width: 500px;
+  margin : 0 auto;
+  min-width: 352px;
 }
-
+.main-container {
+  max-width: 700px;
+  /* background-color: aqua; */
+  display: inline-block;
+  overflow-y: auto;
+  max-height: 500px;
+}
+.container-left {
+  float: inline-start;
+}
+.container-right {
+  float: inline-end;
+}
 .darker {
   border-color: #ccc;
-  background-color: #ddd;
+  background-color: rgb(128, 119, 1 19);
 }
 
 .container::after {
@@ -170,7 +183,6 @@ tr:nth-child(even) {
   width: 100%;
   margin-right: 20px;
   border-radius: 50%;
-  background-color: #fff;
 }
 
 .container img.right {
@@ -181,11 +193,19 @@ tr:nth-child(even) {
 
 .time-right {
   float: right;
-  color: #aaa;
+  /* color: #aaa; */
+  margin-bottom: -10px;
+  font-size: 10px;
+  margin-top: -7px;
+  color: white;
 }
 
 .time-left {
+  color: rgba(255,255,255,0.5);
+    font-size: 10px;
   float: left;
   color: #999;
+  margin-bottom: -10px;
+  color: white;
 }
 </style>

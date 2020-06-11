@@ -1,7 +1,7 @@
 <template>
     <div>
       <ul>
-        <li v-for="(user, index) in users" :key="index">
+        <li v-for="(user, index) in this.$store.state.users" :key="index">
         <router-link v-bind:to="'/message/' + user ">
         <div v:bind:id="1">{{user}}</div>
       </router-link>
@@ -16,7 +16,7 @@ export default {
   data() {
     return {
       dataHistory: [],
-      users: [],
+      users: this.$store.state.users,
       id: ""
     };
   },
@@ -43,7 +43,7 @@ var raw = JSON.stringify({ "login":this.$store.state.data.login
  
      fetch("http://localhost:8080/users", requestOptions)
      .then(res => res.json())
-    .then(json => this.users = json)
+    .then(json => this.$store.state.users = json)
     .then(result => console.log(result))
     .catch(error => console.log('problem', error));
     // .then((response) => response.json())

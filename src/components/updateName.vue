@@ -25,8 +25,8 @@
       <p class="message">Already registered? <a href="#">Sign In</a></p>
     </form> -->
     <form class="login-form" @submit.prevent="updateUser">
-      <input type="text"  :placeholder=this.$store.state.data.fname  v-model="fname" />
-      <input type="text" :placeholder=this.$store.state.data.lname v-model ="lname" />
+      <input type="text"  :placeholder=this.$store.state.data.fname  v-model="fname"  required/>
+      <input type="text" :placeholder=this.$store.state.data.lname v-model ="lname" required />
       <button>Update</button>
       <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
     </form>

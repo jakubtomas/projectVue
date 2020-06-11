@@ -65,9 +65,10 @@ export default {
 #data {
   display: inline-block;
   border: 1px solid black;
-  background-color: rgb(179, 228, 179);
-  border-radius: 10px;
+  background-color:#4CAF50;
+ // border-radius: 10px;
   padding: 0 10px;
+  font-family: "Roboto", sans-serif;
 }
 
 #nav {
@@ -78,10 +79,11 @@ export default {
 color: #2c3e50;
 padding: 5px 4px;
 background-color: #67cb8e;
-border-radius: 10px;
+// border-radius: 10px;
 border: 1px solid black;
 margin: 0px 3px;
 
+ font-family: "Roboto", sans-serif;
     &.router-link-exact-active {
       color: #32330a;
       background-color: rgb(98, 238, 5);

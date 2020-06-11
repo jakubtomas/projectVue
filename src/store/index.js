@@ -10,6 +10,8 @@ export default new Vuex.Store({
     data : [],
     updateUser :[],
     updatePassword: [],
+    sendMessage: [],
+    users: [],
     user: {
       address: '',
       fname: '',
