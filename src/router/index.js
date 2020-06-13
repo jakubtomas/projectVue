@@ -31,6 +31,7 @@ import messages from "../components/messages.vue";
 
 import message from "../components/message.vue";
 
+import logout from "../components/logout.vue";
 
 Vue.use(VueRouter);
 
@@ -137,6 +138,11 @@ const routes = [
     path: "/message/:login",
     name: "message",
     component:message
+  },
+   {
+    path: "/logout",
+    name: "logout",
+    component:logout
   }
 ];
 

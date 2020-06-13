@@ -37,7 +37,8 @@
       <router-link to="/logHistory">logHistory</router-link>
       <router-link to="/updatePassword">Change Password</router-link>
       <router-link to="/updateName">Update name</router-link>
-      <button  type="submit">Logout</button>
+      <router-link to="/logout">Logout</router-link>
+      <button  type="submit" @submit.prevent="logout" >Logout</button>
     </div>
 
     
@@ -50,7 +51,24 @@
 
 <script>
 export default {
-  name:"app"
+  name:"app",
+
+
+data() {
+    return {
+       user : "user24"
+    };
+  },
+  methods: {
+       logout(){
+        console.log("Logout");
+        window.location.href = "http://localhost:8081/";
+              }
+            
+  }
+
+  
+  
 };
 </script>
 
