@@ -1,9 +1,7 @@
 <template>
   <div  id="films">
 
-<!--  Form start function login @keydown.enter  @submit.prevent -->
     <h2>Sign in </h2>
-
 
     <p class="alert-danger" v-if="this.$store.state.data.error"> Message from server <strong>{{this.$store.state.data.error}}</strong></p>
 
@@ -18,38 +16,16 @@
 
 <div class="login-page">
   <div class="form">
-    <!-- <form class="register-form" @submit.prevent="signIn">
-      <input type="text" placeholder="fname" v-model="fname "/>
-      <input type="text" placeholder="lname" v-model="lname "/>
-      <input type="text" placeholder="login" v-model="login"/>
-      <input type="password" placeholder="password" v-model="password"/>
-      <button>create</button>
-      <p class="message">Already registered? <a href="#">Sign In</a></p>
-    </form> -->
+    
     <form class="login-form" @submit.prevent="loginUser">
       <input type="text" placeholder="login" v-model="login" />
       <input type="password" placeholder="password" v-model ="password" />
       <button>login</button>
-      <p class="message">Not registered? <a href="#">Create an account</a></p>
+      <p class="message">Not registered? <a href="/registration">Create an account</a></p>
     </form>
   </div>
 </div>
 
-
-    
-    <!-- <p v-if="Object.values(data)"> my data <strong>{{Object.values(data)[0]}}</strong></p> -->
-
-
-<!-- <h4> Login  {{login}}</h4>
-<h5>Hello   {{this.$store.state.user}}</h5>
-
-<br>
-
-<p> lname {{this.$store.state.data.lname}}</p>
-<p>fname {{this.$store.state.data.fname}}</p>
-<p> login {{this.$store.state.data.login}}</p>
-<p> token {{this.$store.state.data.token}}</p>
-<p> Error {{this.$store.state.data.error}}</p> -->
 
   </div>
 

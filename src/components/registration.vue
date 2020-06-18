@@ -24,7 +24,7 @@
       <input type="text" placeholder="login" v-model="login"/>
       <input type="password" placeholder="password" v-model="password"/>
       <button>create</button>
-      <p class="message">Already registered? <a href="#">Sign In</a></p>
+      <p class="message">Already registered? <a href="/signin">Sign In</a></p>
     </form>
 
   </div>

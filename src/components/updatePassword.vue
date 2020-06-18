@@ -100,7 +100,7 @@ fetch("http://localhost:8080/changePassword ", requestOptions)
 
 
 
-    
+    setTimeout(() => {  this.$store.state.updatePassword =""; }, 4000);
     }
 
 

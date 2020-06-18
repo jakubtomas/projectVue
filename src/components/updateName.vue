@@ -9,36 +9,24 @@
 
     <div  v-if="this.$store.state.updateUser.message" class="alert-success"> 
       <h3>Message from server</h3>
-      <strong> fname {{this.$store.state.updateUser.message}}</strong>
+      <strong>  {{this.$store.state.updateUser.message}}</strong>
       
     </div>
 
+<h4 v-if="this.error"> {{this.error}}</h4>
 
 <div class="login-page">
   <div class="form">
-    <!-- <form class="register-form" @submit.prevent="signIn">
-      <input type="text" placeholder="fname" v-model="fname "/>
-      <input type="text" placeholder="lname" v-model="lname "/>
-      <input type="text" placeholder="login" v-model="login"/>
-      <input type="password" placeholder="password" v-model="password"/>
-      <button>create</button>
-      <p class="message">Already registered? <a href="#">Sign In</a></p>
-    </form> -->
-    <form class="login-form" @submit.prevent="updateUser">
-      <input type="text"  :placeholder=this.$store.state.data.fname  v-model="fname"  required/>
-      <input type="text" :placeholder=this.$store.state.data.lname v-model ="lname" required />
-      <button>Update</button>
-      <!-- <p class="message">Not registered? <a href="#">Create an account</a></p> -->
-    </form>
+      <form class="login-form" @submit.prevent="updateUser">
+        <input type="text"  :placeholder=this.$store.state.data.fname  v-model="fname"  required/>
+        <input type="text" :placeholder=this.$store.state.data.lname v-model ="lname" required />
+        <button>Update</button>
+      </form>
   </div>
 </div>
 
 
-<p> fname {{this.$store.state.data.fname}}</p>
-<br>
-<p> lname {{this.$store.state.data.lname}}</p>
-<p> this fname is  {{this.fname}}</p>
-<h4 v-if="this.error"> {{this.error}}</h4>
+
 
   </div>
 
@@ -73,19 +61,14 @@ export default {
           this.$store.state.data.fname = this.fname;
           this.$store.state.data.lname = this.lname;
         }
-      
-       // this.$store.state.user.address = 'London';
-      console.log(this.$store.state.user.username);
             
         var myHeaders = new Headers(); //this.$store.state.data.login
-      //  myHeaders.append("Authorization", this.$store.state.data.token);
-      myHeaders.append("Authorization",this.$store.state.data.token);
+        myHeaders.append("Authorization",this.$store.state.data.token);
         myHeaders.append("Content-Type", "application/json");
 
       var raw = JSON.stringify({
                           "fname":this.fname,
                           "lname":this.lname,
-                         // "login": this.$store.state.data.login
                           "login":this.$store.state.data.login,
                           });
 
@@ -105,6 +88,7 @@ fetch("http://localhost:8080/update", requestOptions)
 
 
     
+    setTimeout(() => {  this.$store.state.updateUser =""; }, 4000);
     }
 
 
